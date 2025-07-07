@@ -1,1 +1,53 @@
-<!DOCTYPE html><html><head><link rel='stylesheet' href='style.css'></head><body><img src='logo.jpeg'><h1>體脂肪率計算器</h1></body></html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>體脂肪率計算器 | 七月端粒美</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.jpeg" alt="七月端粒美 Logo" class="logo">
+        <h1>體脂肪率計算器</h1>
+    </header>
+    <main>
+        <form id="bfpForm">
+            <label>性別：
+                <select id="gender">
+                    <option value="male">男性</option>
+                    <option value="female">女性</option>
+                </select>
+            </label>
+            <label>年齡：<input type="number" id="age" required></label>
+            <label>身高（cm）：<input type="number" id="height" required></label>
+            <label>體重（kg）：<input type="number" id="weight" required></label>
+            <button type="button" onclick="calculateBFP()">計算</button>
+        </form>
+        <div id="result"></div>
+    </main>
+    <footer>
+        <p>© 2025 七月端粒美 July Telomerase</p>
+    </footer>
+    <script>
+        function calculateBFP() {
+            const gender = document.getElementById('gender').value;
+            const age = parseInt(document.getElementById('age').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const bmi = weight / Math.pow(height / 100, 2);
+            let bfp;
+
+            if (gender === 'male') {
+                bfp = 1.20 * bmi + 0.23 * age - 16.2;
+            } else {
+                bfp = 1.20 * bmi + 0.23 * age - 5.4;
+            }
+
+            document.getElementById('result').innerHTML = `
+                <p>您的體脂肪率約為 <strong>${bfp.toFixed(1)}%</strong></p>
+            `;
+        }
+    </script>
+</body>
+</html>
