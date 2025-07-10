@@ -1,105 +1,57 @@
+
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>體脂肪率簡易計算器 | 七月端粒美</title>
+  <title>體脂肪率計算器 | 七月端粒美</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/twcn-language-switch@1.0.0/dist/lang-switch.min.js"></script>
 </head>
 <body>
   <header>
-    <img src="logo.JPG" alt="七月端粒美 logo" class="logo" />
-    <h1 class="tw">體脂肪率簡易計算器</h1>
-    <h1 class="cn" style="display:none;">体脂肪率简易计算器</h1>
-    <button onclick="LangSwitch.toggle()" class="lang-toggle">繁 / 简</button>
+    <img src="logo.png" alt="七月端粒美 Logo" class="logo" />
+    <img src="product.png" alt="產品圖" class="product-image" />
+    <h1>體脂肪率計算器</h1>
+    <button onclick="toggleLang()">繁 / 简</button>
+    <button onclick="shareWeChat()">微信分享</button>
   </header>
   <main>
-    <form id="bfpForm">
-      <label class="tw">性別：
-        <select id="gender">
-          <option value="male">男性</option>
-          <option value="female">女性</option>
-        </select>
-      </label>
-      <label class="cn" style="display:none;">性别：
-        <select id="gender">
-          <option value="male">男性</option>
-          <option value="female">女性</option>
-        </select>
-      </label>
-      <label class="tw">年齡：<input type="number" id="age" required /></label>
-      <label class="cn" style="display:none;">年龄：<input type="number" id="age" required /></label>
-      <label class="tw">身高（cm）：<input type="number" id="height" required /></label>
-      <label class="cn" style="display:none;">身高（cm）：<input type="number" id="height" required /></label>
-      <label class="tw">體重（kg）：<input type="number" id="weight" required /></label>
-      <label class="cn" style="display:none;">体重（kg）：<input type="number" id="weight" required /></label>
-      <button type="button" onclick="calculateBFP()" class="tw">計算</button>
-      <button type="button" onclick="calculateBFP()" class="cn" style="display:none;">计算</button>
+    <form id="calcForm">
+      <label for="gender">性別：</label>
+      <select id="gender">
+        <option value="male">男性</option>
+        <option value="female">女性</option>
+      </select>
+
+      <label for="age">年齡：</label>
+      <input type="number" id="age" />
+
+      <label for="height">身高（cm）：</label>
+      <input type="number" id="height" />
+
+      <label for="weight">體重（kg）：</label>
+      <input type="number" id="weight" />
+
+      <button type="button" onclick="calculate()">計算</button>
     </form>
-    <div id="result"></div>
-    <section id="bmi-standard">
-      <h2 class="tw">BMI 標準</h2>
-      <h2 class="cn" style="display:none;">BMI 标准</h2>
-      <ul>
-        <li>BMI ＜ 18.5：<span class="tw">過輕</span><span class="cn" style="display:none;">过轻</span></li>
-        <li>18.5 ≦ BMI ＜ 24：正常</li>
-        <li>24 ≦ BMI ＜ 27：<span class="tw">過重</span><span class="cn" style="display:none;">过重</span></li>
-        <li>27 ≦ BMI ＜ 30：輕度肥胖</li>
-        <li>30 ≦ BMI ＜ 35：中度肥胖</li>
-        <li>BMI ≧ 35：重度肥胖</li>
-      </ul>
-    </section>
-    <section id="bfp-standard">
-      <h2 class="tw">體脂率標準</h2>
-      <h2 class="cn" style="display:none;">体脂率标准</h2>
-      <p class="tw">※以下為參考值，實際狀況因人而異</p>
-      <p class="cn" style="display:none;">※以下为参考值，实际状况因人而异</p>
-      <ul>
-        <li>男性正常範圍：約 10% - 20%</li>
-        <li>女性正常範圍：約 18% - 28%</li>
-      </ul>
-    </section>
-    <section id="health-advice">
-      <h2 class="tw">健康建議</h2>
-      <h2 class="cn" style="display:none;">健康建议</h2>
-      <p class="tw">
-        世界衛生組織建議以身體質量指數（Body Mass Index，BMI）來衡量肥胖程度，其計算公式是以體重（公斤）除以身高（公分）的平方。
-        國民健康署建議我國成人BMI應維持在18.5（kg/m2）及24（kg/m2）之間，太瘦、過重或太胖皆有礙健康。
-        研究顯示，體重過重或是肥胖（BMI≥24）為糖尿病、心血管疾病、惡性腫瘤等慢性疾病的主要風險因素；
-        而過瘦的健康問題，則會有營養不良、骨質疏鬆、猝死等健康問題。謝謝你。
-      </p>
-      <p class="cn" style="display:none;">
-        世界卫生组织建议以身体质量指数（Body Mass Index，BMI）来衡量肥胖程度，其计算公式是以体重（公斤）除以身高（公分）的平方。
-        国民健康署建议我国成人BMI应维持在18.5（kg/m2）及24（kg/m2）之间，太瘦、过重或太胖皆有碍健康。
-        研究显示，体重过重或是肥胖（BMI≥24）为糖尿病、心血管疾病、恶性肿瘤等慢性疾病的主要风险因素；
-        而过瘦的健康问题，则会有营养不良、骨质疏松、猝死等健康问题。谢谢你。
+
+    <div id="result">
+      <p id="bmiValue">BMI：</p>
+      <p id="bodyFatValue">體脂肪率：</p>
+      <p id="bmiStandard">BMI 標準：</p>
+      <p id="bodyFatStandard">體脂肪率標準：</p>
+    </div>
+
+    <section id="healthAdvice">
+      <h2>健康建議</h2>
+      <p>
+        從健康的觀點，「肥胖」是威脅生命的高危險因子，與心臟病、高血壓、膽囊疾病、糖尿病、肺活量減少、高脂血症及骨骼關節的疾病都有很密切的相關。
+        因此身體脂肪百分比也是評估健康體能的重要項目，隨著文明的進步和生活水準的提昇，人類身體活動的機會減少，而熱量攝取常超越身體所需，使肥胖日漸增加。
+        因此，要保持身體適當的脂肪百分比，除了需要均衡飲食外，更需要加強運動，藉以燃燒脂肪消耗身體過剩熱量，同時亦是達成體重控制的良好方法。
+        <a href="https://www.j-telomerase.com" target="_blank">上海聯衡生物科技</a> 關心您
       </p>
     </section>
   </main>
-  <footer>
-    <p>© 2025 七月端粒美 July Telomerase</p>
-  </footer>
-  <script>
-    function calculateBFP() {
-      const gender = document.getElementById("gender").value;
-      const age = parseInt(document.getElementById("age").value);
-      const height = parseFloat(document.getElementById("height").value);
-      const weight = parseFloat(document.getElementById("weight").value);
-      const bmi = weight / Math.pow(height / 100, 2);
-      let bfp;
-
-      if (gender === "male") {
-        bfp = 1.20 * bmi + 0.23 * age - 16.2;
-      } else {
-        bfp = 1.20 * bmi + 0.23 * age - 5.4;
-      }
-
-      document.getElementById("result").innerHTML = `
-        <p>BMI：<strong>${bmi.toFixed(1)}</strong></p>
-        <p>體脂肪率：約 <strong>${bfp.toFixed(1)}%</strong></p>
-      `;
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
