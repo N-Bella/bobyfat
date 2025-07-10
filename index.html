@@ -1,57 +1,37 @@
 
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>體脂肪率計算器 | 七月端粒美</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>體脂肪率計算器</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="七月端粒美 Logo" class="logo" />
-    <img src="product.png" alt="產品圖" class="product-image" />
+  <div class="container">
+    <img src="logo.png" alt="Logo" class="logo">
+    <img src="product.png" alt="Product" class="product-img">
     <h1>體脂肪率計算器</h1>
-    <button onclick="toggleLang()">繁 / 简</button>
-    <button onclick="shareWeChat()">微信分享</button>
-  </header>
-  <main>
-    <form id="calcForm">
-      <label for="gender">性別：</label>
-      <select id="gender">
-        <option value="male">男性</option>
-        <option value="female">女性</option>
-      </select>
-
-      <label for="age">年齡：</label>
-      <input type="number" id="age" />
-
-      <label for="height">身高（cm）：</label>
-      <input type="number" id="height" />
-
-      <label for="weight">體重（kg）：</label>
-      <input type="number" id="weight" />
-
-      <button type="button" onclick="calculate()">計算</button>
+    <button id="lang-toggle">繁 / 简</button>
+    <form id="bmiForm">
+      <label>性別：<select id="gender"><option>男性</option><option>女性</option></select></label>
+      <label>年齡：<input type="number" id="age"></label>
+      <label>身高（cm）：<input type="number" id="height"></label>
+      <label>體重（kg）：<input type="number" id="weight"></label>
+      <button type="submit">計算</button>
     </form>
-
-    <div id="result">
-      <p id="bmiValue">BMI：</p>
-      <p id="bodyFatValue">體脂肪率：</p>
-      <p id="bmiStandard">BMI 標準：</p>
-      <p id="bodyFatStandard">體脂肪率標準：</p>
+    <div class="results">
+      <label>BMI 數值：<input type="text" id="bmi" readonly></label>
+      <label>BMI 標準：<input type="text" id="bmiRange" readonly></label>
+      <label>體脂率數值：<input type="text" id="bodyFat" readonly></label>
+      <label>體脂率標準：<input type="text" id="bodyFatRange" readonly></label>
     </div>
-
-    <section id="healthAdvice">
+    <section class="guidance">
       <h2>健康建議</h2>
-      <p>
-        從健康的觀點，「肥胖」是威脅生命的高危險因子，與心臟病、高血壓、膽囊疾病、糖尿病、肺活量減少、高脂血症及骨骼關節的疾病都有很密切的相關。
-        因此身體脂肪百分比也是評估健康體能的重要項目，隨著文明的進步和生活水準的提昇，人類身體活動的機會減少，而熱量攝取常超越身體所需，使肥胖日漸增加。
-        因此，要保持身體適當的脂肪百分比，除了需要均衡飲食外，更需要加強運動，藉以燃燒脂肪消耗身體過剩熱量，同時亦是達成體重控制的良好方法。
-        <a href="https://www.j-telomerase.com" target="_blank">上海聯衡生物科技</a> 關心您
-      </p>
+      <p>從健康的觀點，「肥胖」是威脅生命的高危險因子...<br>
+      <a href="https://www.j-telomerase.com" target="_blank">上海聯衡生物科技</a> 關心您</p>
     </section>
-  </main>
-  <script src="script.js"></script>
+  </div>
 </body>
 </html>
